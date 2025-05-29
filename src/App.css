@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: url('https://wallpapercave.com/wp/wp4923978.jpg') no-repeat center center fixed;
   background-size: cover;
   color: white;
@@ -10,7 +10,7 @@ body {
 .overlay {
   background: rgba(0, 0, 0, 0.85);
   min-height: 100vh;
-  padding: 0;
+  padding-bottom: 2rem;
 }
 
 .header {
@@ -29,97 +29,20 @@ body {
 
 .container {
   max-width: 1000px;
-  margin: auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.card {
-  background-color: #1f1f1f;
-  border-radius: 12px;
-  width: 250px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-/* App.css */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: url('https://wallpapercave.com/wp/wp4923978.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.85);
-  min-height: 100vh;
-  padding: 0;
-}
-
-.header {
-  background-color: #111;
-  padding: 1rem 2rem;
-  text-align: center;
-  border-bottom: 2px solid #ffcc00;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  color: #ffcc00;
-  letter-spacing: 1px;
-}
-
-.navbar {
-  margin-top: 0.5rem;
-}
-
-.navbar a {
-  color: #ccc;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.navbar a:hover {
-  color: #ffcc00;
-}
-
-.container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 2rem;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
   text-align: center;
 }
 
 .search-bar {
   width: 60%;
-  padding: 0.6rem;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
   margin-bottom: 2rem;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
+  outline: none;
 }
 
 .cards {
