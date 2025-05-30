@@ -1,5 +1,4 @@
-// App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function Footer() {
@@ -14,17 +13,21 @@ function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
+  const handleSearch = () => {
     if (search.length > 2) {
-      fetch(`https://api.jikan.moe/v4/manga?q=${search}&limit=10&sfw`)
+      fetch(`https://api.jikan.moe/v4/manga?q=${search}&limit=12&sfw=true`)
         .then(res => res.json())
         .then(data => {
           setResults(data.data);
         });
-    } else {
-      setResults([]);
     }
-  }, [search]);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <div className="overlay">
@@ -43,15 +46,23 @@ function App() {
           className="search-bar"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <div className="cards">
-          {results.map((manga, index) => (
-            <div className="card" key={index}>
-              <img src={manga.images.jpg.image_url} alt={manga.title} />
-              <h2>{manga.title}</h2>
-              <p>{manga.synopsis ? manga.synopsis.slice(0, 100) + '...' : 'No description available.'}</p>
-            </div>
-          ))}
+          {Array.isArray(results) && results.length > 0 ? (
+            results.map((manga, index) => (
+              <div className="card" key={index}>
+                <img
+                  src={manga.images?.jpg?.image_url || 'https://via.placeholder.com/300x450?text=No+Image'}
+                  alt={manga.title}
+                />
+                <h2>{manga.title}</h2>
+                <p>{manga.synopsis ? manga.synopsis.slice(0, 100) + '...' : 'No description available.'}</p>
+              </div>
+            ))
+          ) : (
+            <p style={{ color: "white" }}>No manga found.</p>
+          )}
         </div>
       </div>
       <Footer />
