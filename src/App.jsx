@@ -1,39 +1,6 @@
 // App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-
-const mangas = [
-  {
-    title: "One Piece",
-    desc: "Pirate adventure with Luffy and crew!",
-    img: "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781569319017_9781569319017_lg.jpg"
-  },
-  {
-    title: "Naruto",
-    desc: "Follow Naruto's journey to become Hokage.",
-    img: "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg"
-  },
-  {
-    title: "Attack on Titan",
-    desc: "Fight for humanity against titans!",
-    img: "https://wallpaperaccess.com/full/4848287.jpg"
-  },
-  {
-    title: "Jujutsu Kaisen",
-    desc: "ark curses and powerful sorcery.",
-    img: "https://mangayo.it/2425-large_default/jujutsu-kaisen-1-edizione-giapponese.jpg"
-  },
-  {
-    title: "Demon Slayer",
-    desc: "Fight demons with Tanjiro.",
-    img: "https://i.redd.it/89o2ebk3u95a1.jpg"
-  },,
-  {
-    title: "My Hero Academia",
-    desc: "Superheroes in training.",
-    img: "https://cdn.kobo.com/book-images/2de7a0c2-e628-411e-a416-efc8475d45d6/353/569/90/False/my-hero-academia-vol-1.jpg"
-  },
-];
 
 function Footer() {
   return (
@@ -44,6 +11,21 @@ function Footer() {
 }
 
 function App() {
+  const [search, setSearch] = useState('');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (search.length > 2) {
+      fetch(`https://api.jikan.moe/v4/manga?q=${search}&limit=10&sfw`)
+        .then(res => res.json())
+        .then(data => {
+          setResults(data.data);
+        });
+    } else {
+      setResults([]);
+    }
+  }, [search]);
+
   return (
     <div className="overlay">
       <header className="header">
@@ -55,13 +37,19 @@ function App() {
         </nav>
       </header>
       <div className="container">
-        <input type="text" placeholder="Search Manga..." className="search-bar" />
+        <input
+          type="text"
+          placeholder="Search Manga..."
+          className="search-bar"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <div className="cards">
-          {mangas.map((manga, index) => (
+          {results.map((manga, index) => (
             <div className="card" key={index}>
-              <img src={manga.img} alt={manga.title} />
+              <img src={manga.images.jpg.image_url} alt={manga.title} />
               <h2>{manga.title}</h2>
-              <p>{manga.desc}</p>
+              <p>{manga.synopsis ? manga.synopsis.slice(0, 100) + '...' : 'No description available.'}</p>
             </div>
           ))}
         </div>
