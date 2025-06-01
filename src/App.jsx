@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="overlay">
       <header className="header">
-        <h1>Ahmed Manga Store</h1>
+        <h1>Ahmed</h1>
         <nav className="navbar">
           <a href="#">Home</a>
           <a href="#">About</a>
