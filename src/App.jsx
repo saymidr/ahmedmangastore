@@ -15,7 +15,7 @@ function App() {
 
   const handleSearch = () => {
     if (search.length > 2) {
-      fetch(`https://api.jikan.moe/v4/manga?q=${search}&limit=12&sfw=true`)
+      fetch(`https://api.jikan.moe/v4/manga?q=${search}&limit=12`)
         .then(res => res.json())
         .then(data => {
           setResults(data.data);
